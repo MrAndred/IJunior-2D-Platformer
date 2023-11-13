@@ -52,7 +52,7 @@ public class Enemy : MonoBehaviour
             transform.rotation = Quaternion.Euler(transform.rotation.x, _defaultRotationY, transform.rotation.z);
         }
 
-        if (Vector2.Distance(transform.position, _target.position) < 0.001f)
+        if (Vector2.Distance(transform.position, _target.position) < 0.01f)
         {
             _currentPointIndex++;
 

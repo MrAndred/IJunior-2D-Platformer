@@ -51,7 +51,7 @@ public class Player : MonoBehaviour
             return;
         }
 
-        float horizontal = Input.GetAxis("Horizontal") * _speed;
+        float horizontal = Input.GetAxis("Horizontal") * _speed * Time.deltaTime;
 
         if (horizontal < _defaultRotationY)
         {
@@ -68,7 +68,7 @@ public class Player : MonoBehaviour
 
     private void HandleJump()
     {
-        float jump = Input.GetAxis("Jump") * _jumpForce;
+        float jump = Input.GetAxis("Jump") * _jumpForce * Time.deltaTime;
         _isGrounded = Physics2D.Raycast(transform.position, Vector2.down, _groundCheckDistance);
 
         if (jump > 0 && _isGrounded == true)
