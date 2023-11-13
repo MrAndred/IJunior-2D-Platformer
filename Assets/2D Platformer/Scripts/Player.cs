@@ -34,6 +34,15 @@ public class Player : MonoBehaviour
         _rigidbody2D = GetComponent<Rigidbody2D>();
     }
 
+    private void OnTriggerEnter2D(Collider2D collision)
+    {
+        if (collision.TryGetComponent(out Coin coin))
+        {
+            Debug.Log(coin.Value);
+            coin.gameObject.SetActive(false);
+        }
+    }
+
     private void HandleInput()
     {
         if (_isGrounded == false)
