@@ -14,6 +14,8 @@ public class Enemy : MonoBehaviour
     private float _flipAngle;
     private float _defaultRotationY;
 
+    private string _speedFloatName = "Speed";
+
     private void OnValidate()
     {
         _animator = GetComponent<Animator>();
@@ -65,7 +67,7 @@ public class Enemy : MonoBehaviour
         }
 
         float horizontalAbs = Mathf.Abs(horizontal);
-        _animator.SetFloat("Speed", horizontalAbs);
+        _animator.SetFloat(_speedFloatName, horizontalAbs);
         transform.Translate(horizontalAbs, 0, 0);
     }
 }

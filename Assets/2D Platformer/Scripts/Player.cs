@@ -15,6 +15,11 @@ public class Player : MonoBehaviour
     private float _flipAngle;
     private float _defaultRotationY;
 
+    private string _horizontalAxisName = "Horizontal";
+    private string _jumpAxisName = "Jump";
+    private string _jumpTriggerName = "Jump";
+    private string _speedFloatName = "Speed";
+
     private void Start()
     {
         _minSpeed = 0f;
@@ -47,11 +52,11 @@ public class Player : MonoBehaviour
     {
         if (_isGrounded == false)
         {
-            _animator.SetFloat("Speed", _minSpeed);
+            _animator.SetFloat(_speedFloatName, _minSpeed);
             return;
         }
 
-        float horizontal = Input.GetAxis("Horizontal") * _speed * Time.deltaTime;
+        float horizontal = Input.GetAxis(_horizontalAxisName) * _speed * Time.deltaTime;
 
         if (horizontal < _defaultRotationY)
         {
@@ -62,13 +67,13 @@ public class Player : MonoBehaviour
             transform.rotation = Quaternion.Euler(transform.rotation.x, _defaultRotationY, transform.rotation.z);
         }
 
-        _animator.SetFloat("Speed", Mathf.Abs(horizontal));
+        _animator.SetFloat(_speedFloatName, Mathf.Abs(horizontal));
         _rigidbody2D.velocity = new Vector2(horizontal, _rigidbody2D.velocity.y);
     }
 
     private void HandleJump()
     {
-        float jump = Input.GetAxis("Jump") * _jumpForce * Time.deltaTime;
+        float jump = Input.GetAxis(_jumpAxisName) * _jumpForce * Time.deltaTime;
         _isGrounded = Physics2D.Raycast(transform.position, Vector2.down, _groundCheckDistance);
 
         if (jump > 0 && _isGrounded == true)
@@ -79,7 +84,7 @@ public class Player : MonoBehaviour
 
         if (_isJumping == true)
         {
-            _animator.SetTrigger("Jump");
+            _animator.SetTrigger(_jumpTriggerName);
             _isJumping = false;
         }
     }
