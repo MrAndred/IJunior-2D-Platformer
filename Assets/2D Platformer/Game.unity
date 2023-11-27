@@ -798,7 +798,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 7402031579672555977, guid: 04daeb6ae86e60c4a947cfe54968d66a, type: 3}
       propertyPath: _speed
-      value: 100
+      value: 2
       objectReference: {fileID: 0}
     - target: {fileID: 7402031579672555977, guid: 04daeb6ae86e60c4a947cfe54968d66a, type: 3}
       propertyPath: _damage
@@ -813,8 +813,16 @@ PrefabInstance:
       value: 
       objectReference: {fileID: 1405226057}
     - target: {fileID: 7402031579672555977, guid: 04daeb6ae86e60c4a947cfe54968d66a, type: 3}
+      propertyPath: _agroDistance
+      value: 5
+      objectReference: {fileID: 0}
+    - target: {fileID: 7402031579672555977, guid: 04daeb6ae86e60c4a947cfe54968d66a, type: 3}
       propertyPath: _stopDistance
-      value: 1
+      value: 1.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 7402031579672555977, guid: 04daeb6ae86e60c4a947cfe54968d66a, type: 3}
+      propertyPath: _attackDistance
+      value: 2
       objectReference: {fileID: 0}
     - target: {fileID: 7402031579672555977, guid: 04daeb6ae86e60c4a947cfe54968d66a, type: 3}
       propertyPath: _layerMask.m_Bits
@@ -904,15 +912,15 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 4895694716897383759, guid: 2f7eeaf41636b0f4f8ca52ea6858fd36, type: 3}
       propertyPath: _speed
-      value: 100
+      value: 3
       objectReference: {fileID: 0}
     - target: {fileID: 4895694716897383759, guid: 2f7eeaf41636b0f4f8ca52ea6858fd36, type: 3}
       propertyPath: _damage
-      value: 30
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 4895694716897383759, guid: 2f7eeaf41636b0f4f8ca52ea6858fd36, type: 3}
       propertyPath: _jumpForce
-      value: 100
+      value: 3
       objectReference: {fileID: 0}
     - target: {fileID: 4895694716897383759, guid: 2f7eeaf41636b0f4f8ca52ea6858fd36, type: 3}
       propertyPath: _attackRate
