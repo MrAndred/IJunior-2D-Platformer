@@ -1,4 +1,3 @@
-using System;
 using TMPro;
 using UnityEngine;
 
@@ -11,17 +10,18 @@ public class TextHealthBar : MonoBehaviour
 
     private Health _health;
     private float _maxHealth;
-
-    private Action _onInitialized;
+    private bool _isInitialized;
 
     private void OnEnable()
     {
-        _onInitialized += OnInitialized;
+        if (_isInitialized == true)
+        {
+            _health.OnHealthChanged += HealthChanged;
+        }
     }
 
     private void OnDisable()
     {
-        _onInitialized -= OnInitialized;
         _health.OnHealthChanged -= HealthChanged;
     }
 
@@ -30,12 +30,8 @@ public class TextHealthBar : MonoBehaviour
         _health = health;
         _maxHealth = health.Value;
         _text.text = string.Format(_textFormat, _health.Value, _maxHealth);
+        _isInitialized = true;
 
-        _onInitialized?.Invoke();
-    }
-
-    private void OnInitialized()
-    {
         _health.OnHealthChanged += HealthChanged;
     }
 

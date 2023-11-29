@@ -1,4 +1,3 @@
-using System;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -9,17 +8,18 @@ public class HarshHealthBar : MonoBehaviour
 
     private Health _health;
     private float _maxHealth;
-
-    private Action _onInitialized;
+    private bool _isInitialized;
 
     private void OnEnable()
     {
-        _onInitialized += OnInitialized;
+        if (_isInitialized == true)
+        {
+            _health.OnHealthChanged += HealthChanged;
+        }
     }
 
     private void OnDisable()
     {
-        _onInitialized -= OnInitialized;
         _health.OnHealthChanged -= HealthChanged;
     }
 
@@ -29,12 +29,6 @@ public class HarshHealthBar : MonoBehaviour
         _maxHealth = health.Value;
         _slider.maxValue = _maxHealth;
         _slider.value = _health.Value;
-
-        _onInitialized?.Invoke();
-    }
-
-    private void OnInitialized()
-    {
         _health.OnHealthChanged += HealthChanged;
     }
 

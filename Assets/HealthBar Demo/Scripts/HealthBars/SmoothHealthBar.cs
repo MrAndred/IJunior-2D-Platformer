@@ -1,4 +1,3 @@
-using System;
 using System.Collections;
 using UnityEngine;
 using UnityEngine.UI;
@@ -11,19 +10,21 @@ public class SmoothHealthBar : MonoBehaviour
 
     private Health _health;
     private float _maxHealth;
+    private bool _isInitialized;
 
     private Coroutine _changeSliderValueCoroutine;
-    private Action _onInitialized;
 
     private void OnEnable()
     {
-        _onInitialized += OnInitialized;
+        if (_isInitialized == true)
+        {
+            _health.OnHealthChanged += HandleHealthChanged;
+        }
     }
 
     private void OnDisable()
     {
         _health.OnHealthChanged -= HandleHealthChanged;
-        _onInitialized -= OnInitialized;
     }
 
     public void Init(Health health)
@@ -33,12 +34,8 @@ public class SmoothHealthBar : MonoBehaviour
 
         _slider.maxValue = _maxHealth;
         _slider.value = _maxHealth;
+        _isInitialized = true;
 
-        _onInitialized?.Invoke();
-    }
-
-    private void OnInitialized()
-    {
         _health.OnHealthChanged += HandleHealthChanged;
     }
 
