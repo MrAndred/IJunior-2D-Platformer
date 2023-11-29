@@ -1,22 +1,42 @@
+using System;
 using TMPro;
 using UnityEngine;
 
 [RequireComponent(typeof(TextMeshProUGUI))]
 public class TextHealthBar : MonoBehaviour
 {
+    private const string _textFormat = "{0}/{1}";
+
     [SerializeField] private TextMeshProUGUI _text;
 
     private Health _health;
     private float _maxHealth;
 
-    private const string _textFormat = "{0}/{1}";
+    private Action _onInitialized;
+
+    private void OnEnable()
+    {
+        _onInitialized += OnInitialized;
+    }
+
+    private void OnDisable()
+    {
+        _onInitialized -= OnInitialized;
+        _health.OnHealthChanged -= HealthChanged;
+    }
 
     public void Init(Health health)
     {
         _health = health;
         _maxHealth = health.Value;
-        _health.OnHealthChanged += HealthChanged;
         _text.text = string.Format(_textFormat, _health.Value, _maxHealth);
+
+        _onInitialized?.Invoke();
+    }
+
+    private void OnInitialized()
+    {
+        _health.OnHealthChanged += HealthChanged;
     }
 
     private void HealthChanged()

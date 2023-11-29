@@ -22,12 +22,21 @@ public class Entity : MonoBehaviour
         Init();
     }
 
+    private void OnEnable()
+    {
+        _takeDamageButton.onClick.AddListener(() => _health.TakeDamage(_damageValue));
+        _healButton.onClick.AddListener(() => _health.Heal(_healValue));
+    }
+
+    private void OnDisable()
+    {
+        _takeDamageButton.onClick.RemoveListener(() => _health.TakeDamage(_damageValue));
+        _healButton.onClick.RemoveListener(() => _health.Heal(_healValue));
+    }
+
     public void Init()
     {
         _health = new Health(_maxHealth);
-
-        _takeDamageButton.onClick.AddListener(() => _health.TakeDamage(_damageValue));
-        _healButton.onClick.AddListener(() => _health.Heal(_healValue));
 
         _textHealthBar.Init(_health);
         _harshHealthBar.Init(_health);
